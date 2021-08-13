@@ -1,6 +1,5 @@
 package conexiones;
 
-
 public class crearModConexionDesdeDatosEnTXT {
 	
 	private modConexion modeloDeConexion=null;
@@ -12,10 +11,10 @@ public class crearModConexionDesdeDatosEnTXT {
 		this.nombreBD=BD;
 		this.nombreFilaConDatosDeConexion=nombreFila;
 		
-		new buscarBaseEnTXT().obtenerDatosDeConexion(nombreBD,nombreFilaConDatosDeConexion);
+		setModCon(new buscarBaseEnTXT().obtenerDatosDeConexion(nombreBD,nombreFilaConDatosDeConexion));
 			
 			while(modeloDeConexion==null) {
-				this.modeloDeConexion=new iguSolicitaDatosDeConexion().getModelo();
+				//this.modeloDeConexion=new iguSolicitaDatosDeConexion(modeloDeConexion).getModelo();
 			}
 
 		

@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import crTransfo.CRTransfo;
+
 public class buscarBaseEnTXT {
 	
 	private String servidor;
@@ -15,40 +17,42 @@ public class buscarBaseEnTXT {
 	private String usuari;
 	private String passwo;
 	private String base;
-	
 	private String nombreFila;
-	
 	private FileReader fr;
 	private BufferedReader bf;
 	
-	public modConexion obtenerDatosDeConexion(String BD, String nombre) {
+	public modConexion obtenerDatosDeConexion(String BD, String archivo) {
 		
-		modConexion modeloConexion=null;	
-		this.nombreFila=nombre;
+		modConexion modeloConexion=new modConexion();	
+		this.nombreFila=archivo;
 		this.base=BD;
 		
-		if(buscarFila(nombreFila)) {
+		if(new File(nombreFila).canRead()) {
 
-			
-			if(buscarTXT(base,nombreFila)) {
+			if(importarDatosDeConexionDelArchivoDeConfiguracion(base,nombreFila)) {
 				
-				modeloConexion.setHostname(this.servidor);
-				modeloConexion.setPuerto(this.puerto);
-				modeloConexion.setUsuario(this.usuari);
-				modeloConexion.setClave(this.passwo);
-				modeloConexion.setBaseDatos(this.base);
-				
+				setDatosDeConexion(modeloConexion);
 				
 			}else {
-				noExisteLaBase(base,nombre);				
+				noExisteLaBase(base,archivo);				
 			}
 		}else {
-			noExisteElArchivo(nombre);
+			noExisteElArchivo(archivo);
 		}
 		
 		return modeloConexion;
 	}
 	
+	private void setDatosDeConexion(modConexion modeloConexion) {
+		
+		modeloConexion.setHostname(this.servidor);
+		modeloConexion.setPuerto(this.puerto);
+		modeloConexion.setUsuario(this.usuari);
+		modeloConexion.setClave(this.passwo);
+		modeloConexion.setBaseDatos(this.base);
+		
+	}
+
 	private void noExisteElArchivo(String nombre) {
 		
 		JOptionPane.showInternalMessageDialog(null, "NO EXISTE EL ARCHIVO "+ nombre);
@@ -60,17 +64,14 @@ public class buscarBaseEnTXT {
 		JOptionPane.showInternalMessageDialog(null, "NO EXISTE LA BASE "+base+" EN EL ARCHIVO "+ nombre);
 		
 	}
-
-	public boolean buscarFila(String nombre){
-		File archivo= new File(nombre);
+	
+	private void problemasParaAbrirElArchivo(String nombre) {
 		
-			if(archivo != null)
-				return true;
-			
-			return false;
+		JOptionPane.showInternalMessageDialog(null, "PROBLEMAS AL ABRIR EL ARCHIVO "+ nombre);
+		
 	}
 	
-	public boolean buscarTXT(String BD, String nombreFila) {
+	public boolean importarDatosDeConexionDelArchivoDeConfiguracion(String BD, String nombreFila) {
 		
 		try {
 			fr=new FileReader(nombreFila);
@@ -92,9 +93,8 @@ public class buscarBaseEnTXT {
 									sCadena=bf.readLine();
 									this.usuari=sCadena.substring(8, sCadena.length());
 									sCadena=bf.readLine();
-									this.passwo=transfo.devuelve(sCadena.substring(8, sCadena.length()));
-									
-									
+									this.passwo=CRTransfo.DesEncriptaElParametro(sCadena.substring(8, sCadena.length()));
+								
 									return true;
 								}
 							
@@ -103,12 +103,15 @@ public class buscarBaseEnTXT {
 					
 				}
 			} catch (IOException e) {
+				problemasParaAbrirElArchivo(nombreFila);
 				return false;
 			
 			}	/// FIN WHILE
 		} catch (FileNotFoundException e) {
+			problemasParaAbrirElArchivo(nombreFila);
 			return false;
 		}
+		return false;
 
 	}
 }

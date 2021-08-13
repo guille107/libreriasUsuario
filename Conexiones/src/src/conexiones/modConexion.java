@@ -22,12 +22,14 @@ public class modConexion {
   	private String BaseDatos;
 	private	Connection conn=null;
 	
-	public modConexion(String nombreBD,String nombreFilaConDatosDeConexion) {
-		
-		conectar(new crearModConexionDesdeDatosEnTXT(nombreBD,nombreFilaConDatosDeConexion).getModCon());
+	public modConexion() {
 		
 	}
-
+	public modConexion(String nombreBD,String nombreFilaConDatosDeConexion) {
+		this.BaseDatos=nombreBD;
+		
+		conectar(new crearModConexionDesdeDatosEnTXT(nombreBD,nombreFilaConDatosDeConexion).getModCon());
+	}
 
   	public  Connection conectar(modConexion datosConexion) {
 
@@ -38,7 +40,7 @@ public class modConexion {
     		conn = DriverManager.getConnection(url, datosConexion.getUsuario(), datosConexion.getClave());
         } catch (SQLException e) {
         	
-			JOptionPane.showMessageDialog(null, "NO SE PUEDE CONECTAR A LA BASE DE DATOS. SALIENDO DEL SISTEMA");
+			JOptionPane.showMessageDialog(null, "NO SE PUEDE CONECTAR A LA BASE DE DATOS "+ this.BaseDatos + " - SALIENDO DEL SISTEMA");
 			System.exit(0);
         }
   		 		

@@ -3,6 +3,7 @@ package elementos;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
+import conexiones.modConexion;
 import unidades.modUnidad;
 
 public class ImpleIElementos implements IElementos{

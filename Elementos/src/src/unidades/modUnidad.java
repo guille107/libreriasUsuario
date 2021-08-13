@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ctrlConexiones.CTRLConexiones;
-import modConexion.modConexion;
-import varios.Constantes;
+import conexiones.modConexion;
 
 public class modUnidad {
 	private int idUnidad;
@@ -37,14 +35,15 @@ public class modUnidad {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
-		Connection conexion=new modConexion().conectar(new CTRLConexiones(Constantes.baseTaFu).getModCon());
+		modConexion conexion=new modConexion("tafubd","U:\\LibreriasDeUsuarios\\Conexiones\\BDs.conf");
+		
 		
 		modUnidad[] temp=new modUnidad[1];
 		ArrayList<modUnidad> listaUnidad = new ArrayList<modUnidad>(1);
 		
         try {
         	String sql = "SELECT * FROM unidades";
-        	ps=conexion.prepareStatement(sql);
+        	ps=((Connection) conexion).prepareStatement(sql);
             rs = ps.executeQuery(sql);
             
             while (rs.next()) {
@@ -71,7 +70,7 @@ public class modUnidad {
         }finally {
 			try {
 				if(conexion != null)
-					conexion.close();
+					((Connection) conexion).close();
 			
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -86,12 +85,12 @@ public class modUnidad {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
-		Connection conexion=new modConexion().conectar(new CTRLConexiones(Constantes.baseTaFu).getModCon());
+		modConexion conexion=new modConexion("tafubd","BDs.conf");
 
 		
 		String sql="SELECT * FROM unidades WHERE  idunidad=?";
 		try {
-			ps=conexion.prepareStatement(sql);
+			ps=((Connection) conexion).prepareStatement(sql);
 			ps.setInt(1, texto);
 			rs=ps.executeQuery();
 			
@@ -111,7 +110,7 @@ public class modUnidad {
 		}finally {
 			try {
 				if(conexion != null)
-					conexion.close();
+					conexion.cerrar();
 			
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -126,12 +125,12 @@ public class modUnidad {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
-		Connection conexion=new modConexion().conectar(new CTRLConexiones(Constantes.baseTaFu).getModCon());
+		modConexion conexion=new modConexion("tafubd","BDs.conf");
 
 		
 		String sql="SELECT * FROM unidades WHERE unidad=?";
 		try {
-			ps=conexion.prepareStatement(sql);
+			ps=((Connection) conexion).prepareStatement(sql);
 			ps.setString(1, strUnidad.trim());
 			rs=ps.executeQuery();
 			
@@ -148,7 +147,7 @@ public class modUnidad {
 		}finally {
 			try {
 				if(conexion != null)
-					conexion.close();
+					conexion.cerrar();
 			
 			}catch(SQLException e) {
 				e.printStackTrace();
