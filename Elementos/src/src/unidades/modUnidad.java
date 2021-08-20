@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import conexiones.modConexion;
+import varios.Constantes;
 
 public class modUnidad {
 	private int idUnidad;
 	private String Unidad;
+	private String nombreBD=Constantes.NOMBRE_BD;
+	private String archivoDeConfiguracionBD=Constantes.ARCHIVO_DE_CONFIG_BD;
+	private Connection conexion;
 
 	public modUnidad() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public modUnidad(int idUnidad) {
@@ -22,29 +25,24 @@ public class modUnidad {
 		
 	}
 	
-	public modUnidad(int idUnidad, String unidad) {
+	public modUnidad(int idUni, String unidad) {
 		
-		this.idUnidad = idUnidad;
-		Unidad = unidad;
+		this.idUnidad = idUni;
+		this.Unidad = unidad;
 		
 	}
 
 	public modUnidad[] todasLasUnidades() {
+
 		modUnidad[] todasLasUnidades=null;
-		
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		
-		modConexion conexion=new modConexion("tafubd","U:\\LibreriasDeUsuarios\\Conexiones\\BDs.conf");
-		
-		
-		modUnidad[] temp=new modUnidad[1];
+    	String sql = "SELECT * FROM unidades";
+    	
+    	modUnidad[] temp=new modUnidad[1];
 		ArrayList<modUnidad> listaUnidad = new ArrayList<modUnidad>(1);
 		
         try {
-        	String sql = "SELECT * FROM unidades";
-        	ps=((Connection) conexion).prepareStatement(sql);
-            rs = ps.executeQuery(sql);
+        	
+    		ResultSet rs=getConexion().prepareStatement(sql).executeQuery();
             
             while (rs.next()) {
 
@@ -69,8 +67,8 @@ public class modUnidad {
             
         }finally {
 			try {
-				if(conexion != null)
-					((Connection) conexion).close();
+				if(getConexion() != null)
+					getConexion().close();
 			
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -80,22 +78,20 @@ public class modUnidad {
 		
 	}
 
-	public modUnidad buscaUnidadXID(int texto) {
-		
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		
-		modConexion conexion=new modConexion("tafubd","BDs.conf");
+	public modUnidad buscaUnidadXID(int IDRecibido) {
 
-		
+		PreparedStatement ps=null;
+
+		ResultSet rs=null;
+	
 		String sql="SELECT * FROM unidades WHERE  idunidad=?";
 		try {
-			ps=((Connection) conexion).prepareStatement(sql);
-			ps.setInt(1, texto);
+			ps=getConexion().prepareStatement(sql);
+			ps.setInt(1, IDRecibido);
 			rs=ps.executeQuery();
 			
 			if(rs.next()) {
-				setIdUnidad(texto);
+				setIdUnidad(IDRecibido);
 				setUnidad(rs.getString(2));
 				return this;
 			}
@@ -109,8 +105,8 @@ public class modUnidad {
 		
 		}finally {
 			try {
-				if(conexion != null)
-					conexion.cerrar();
+				if(getConexion() != null)
+					getConexion().close();
 			
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -124,13 +120,10 @@ public class modUnidad {
 		
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		
-		modConexion conexion=new modConexion("tafubd","BDs.conf");
 
-		
 		String sql="SELECT * FROM unidades WHERE unidad=?";
 		try {
-			ps=((Connection) conexion).prepareStatement(sql);
+			ps=getConexion().prepareStatement(sql);
 			ps.setString(1, strUnidad.trim());
 			rs=ps.executeQuery();
 			
@@ -146,8 +139,8 @@ public class modUnidad {
 		
 		}finally {
 			try {
-				if(conexion != null)
-					conexion.cerrar();
+				if(getConexion() != null)
+					getConexion().close();
 			
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -156,6 +149,19 @@ public class modUnidad {
 		
 		return unidad;
 	}
+	
+	private Connection getConexion() {
+		if(this.conexion==null) 
+			setConexion();
+		
+		return conexion;
+	}
+	
+	private void setConexion() {
+
+			this.conexion=new modConexion(nombreBD,archivoDeConfiguracionBD).getConexion();
+	}
+	
 	public int getIdUnidad() {
 		return idUnidad;
 	}

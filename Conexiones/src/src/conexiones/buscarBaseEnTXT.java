@@ -61,7 +61,7 @@ public class buscarBaseEnTXT {
 
 	private void noExisteLaBase(String base, String nombre) {
 		
-		JOptionPane.showInternalMessageDialog(null, "NO EXISTE LA BASE "+base+" EN EL ARCHIVO "+ nombre);
+		JOptionPane.showInternalMessageDialog(null, "NO EXISTE LA BASE DE DATOS EN EL ARCHIVO "+ nombre);
 		
 	}
 	

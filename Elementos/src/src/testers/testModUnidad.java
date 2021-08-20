@@ -1,18 +1,22 @@
 package testers;
 
-import java.util.ArrayList;
-
 import unidades.modUnidad;
 
 public abstract class testModUnidad {
+	private modUnidad[] listas;
 
 	public static void main(String[] args) {
 		
-		modUnidad[] listaUni=new modUnidad().todasLasUnidades();
-		
-		for(int a=0;a<listaUni.length;a++) {
-			System.out.println("1-"+listaUni[a].toString());
+		modUnidad uni=new modUnidad();
+		modUnidad[] listas=uni.todasLasUnidades();
+		 
+		for(modUnidad listUni:listas) {
+			
+			System.out.println(listUni.toString());
+			
 		}
+		
+		
 
 	}
 

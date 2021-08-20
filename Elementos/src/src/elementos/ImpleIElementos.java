@@ -1,5 +1,8 @@
 package elementos;
 
+import java.sql.Connection;
+
+import varios.Constantes;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
@@ -22,7 +25,17 @@ public class ImpleIElementos implements IElementos{
 	private int multCompra;
 	private String idProveedor;
 
-		
+	@Override
+	public Object buscaXIDYDevuelveElObjetoEncontrado(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Object buscaXidProveedor(String idProveedor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public boolean verificaSiExisteID(String idElemento) {
 		modConexion conexion=new modConexion();
@@ -33,11 +46,7 @@ public class ImpleIElementos implements IElementos{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
-	public boolean buscaXidProveedor(String texto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	@Override
 	public Object[] listaDeTodos(String cadena) {
 		// TODO Auto-generated method stub
@@ -59,7 +68,8 @@ public class ImpleIElementos implements IElementos{
 		return false;
 	}
 	@Override
-	public void deRSASetters(ResultSet rs) {
+	public Object creaObjetoConRS(ResultSet rs) {
+		return rs;
 		// TODO Auto-generated method stub
 		
 	}
@@ -68,7 +78,7 @@ public class ImpleIElementos implements IElementos{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	public boolean isActivo() {
 		return activo;
 	}
@@ -132,8 +142,8 @@ public class ImpleIElementos implements IElementos{
 	public LocalDate getFechaModiFicha() {
 		return fechaModiFicha;
 	}
-	public void setFechaModiFicha(LocalDate fechaModiFicha) {
-		this.fechaModiFicha = fechaModiFicha;
+	public void setFechaModiFicha(LocalDate localDate) {
+		this.fechaModiFicha = localDate;
 	}
 	public int getMultCompra() {
 		return multCompra;
@@ -147,6 +157,4 @@ public class ImpleIElementos implements IElementos{
 	public void setIdProveedor(String idProveedor) {
 		this.idProveedor = idProveedor;
 	}
-
-
 }

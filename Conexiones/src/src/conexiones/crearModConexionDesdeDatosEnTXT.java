@@ -17,13 +17,12 @@ public class crearModConexionDesdeDatosEnTXT {
 				//this.modeloDeConexion=new iguSolicitaDatosDeConexion(modeloDeConexion).getModelo();
 			}
 
-		
-
 	}
 
 	public modConexion getModCon() {
 		return modeloDeConexion;
 	}
+	
 	public void setModCon(modConexion modelo) {
 		this.modeloDeConexion=modelo;
 		System.out.println(this.modeloDeConexion);

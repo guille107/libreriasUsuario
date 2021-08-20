@@ -5,13 +5,6 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
-/**
- * RUTINA DE CONEXION (07-2021)
- * Connection conexion=new modConexion().conectar(new CTRLConexiones(Constantes.baseTaFu).getModCon());
- * Debe estar cargada la constante con el nombre de la base de datos en la clase Constantes.
- * Deben estar cargados los datos de la conexion en BDs.conf, sino se debe conectar manualmente.
- */
-
 public class modConexion {
 	
 	private String driver= "com.mysql.jdbc.Driver";
@@ -27,20 +20,24 @@ public class modConexion {
 	}
 	public modConexion(String nombreBD,String nombreFilaConDatosDeConexion) {
 		this.BaseDatos=nombreBD;
+			
 		
-		conectar(new crearModConexionDesdeDatosEnTXT(nombreBD,nombreFilaConDatosDeConexion).getModCon());
+		setConexion(conectar(new crearModConexionDesdeDatosEnTXT(nombreBD,nombreFilaConDatosDeConexion).getModCon()));
+		
 	}
 
   	public  Connection conectar(modConexion datosConexion) {
 
   	   	String url= "jdbc:mysql://" + datosConexion.getHostname() + ":" + datosConexion.getPuerto() + "/" 
   	    	   	+ datosConexion.getBaseDatos() + "?useSSL=false";
-  	
-    	try {  		
+
+    	try {
+
     		conn = DriverManager.getConnection(url, datosConexion.getUsuario(), datosConexion.getClave());
+
         } catch (SQLException e) {
         	
-			JOptionPane.showMessageDialog(null, "NO SE PUEDE CONECTAR A LA BASE DE DATOS "+ this.BaseDatos + " - SALIENDO DEL SISTEMA");
+			JOptionPane.showMessageDialog(null, "NO SE PUEDE CONECTAR A LA BASE DE DATOS\n                SALIENDO DEL SISTEMA");
 			System.exit(0);
         }
   		 		

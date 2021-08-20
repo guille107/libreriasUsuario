@@ -4,7 +4,7 @@ import crTransfo.*;
 public class testEncriptar {
 
 	public static void main(String[] args) {
-		String texto="Texto a Encriptar";
+		String texto="tafuMySQL1965";
 		String encriptado=CRTransfo.EncriptaElParametro(texto);
 		String desencriptado=CRTransfo.DesEncriptaElParametro(encriptado);
 		
