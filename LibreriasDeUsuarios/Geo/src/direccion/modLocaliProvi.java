@@ -1,8 +1,8 @@
 package direccion;
 
-import java.io.IOException;
 
 import conexiones.modConexion;
+import varios.Constantes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,8 +69,55 @@ public final class modLocaliProvi {
 			}
 			
 		}
+
 	}
+	public modLocaliProvi devuelveLocaliProviSiExiste(String ID) {
+		modLocaliProvi localiProviEncontradas=null;
+		setIdLocalProvi(ID);
 		
+		if(!extisteID(ID)) {
+			return localiProviEncontradas;
+		}
+		
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
+		String sql="SELECT * FROM articulos WHERE idarticulo=?";
+
+		try {
+		
+			ps=getConexion().prepareStatement(sql);
+			ps.setString(1, getIdLocalProvi().trim());
+			rs=ps.executeQuery();
+
+			if(rs.next()) {				
+				setIdLocalProvi(rs.getString(1));
+				setLocalidad(rs.getString(2));
+				setProvincia(rs.getString(3));	
+			}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+
+			
+		}finally {
+			try {
+				if(getConexion() != null)
+					getConexion().close();
+		
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			
+		return localiProviEncontradas;
+	}
+	private void setidLocalProvi() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private Connection getConexion() {
 		try {
 			if(this.conexion==null||this.conexion.isClosed()) 

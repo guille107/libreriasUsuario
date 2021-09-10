@@ -17,13 +17,22 @@ package direccion;
 public class modDireccion {
 
 	private String calle;
-	private int numeracion;
+	private String numeracion;
 	private modLocaliProvi LocaliProvi; //Ejemplo 01_0001 7 digitos
 	private String codPostal;
 	private String Pais;
 	private String Observaciones;
 	
-	public modDireccion(String calle, int numeracion, modLocaliProvi localiProvi, String codPostal, String pais) {
+	public modDireccion(String calle, String numeracion, String idLocaliProvi, String codPostal) {
+
+		this.calle = calle;
+		this.numeracion = numeracion;
+		this.LocaliProvi=new modLocaliProvi(idLocaliProvi);
+		this.codPostal = codPostal;
+		Pais = "Argentina";
+	}
+	
+	public modDireccion(String calle, String numeracion, modLocaliProvi localiProvi, String codPostal, String pais) {
 
 		this.calle = calle;
 		this.numeracion = numeracion;
@@ -40,11 +49,11 @@ public class modDireccion {
 		this.calle = calle;
 	}
 	
-	public int getNumeracion() {
+	public String getNumeracion() {
 		return numeracion;
 	}
 	
-	public void setNumeracion(int numeracion) {
+	public void setNumeracion(String numeracion) {
 		this.numeracion = numeracion;
 	}
 	
