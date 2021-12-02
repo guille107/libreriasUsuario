@@ -26,7 +26,6 @@ public class buscarBaseEnTXT {
 		modConexion modeloConexion=new modConexion();	
 		this.nombreFila=archivo;
 		this.base=BD;
-		
 		if(new File(nombreFila).canRead()) {
 
 			if(importarDatosDeConexionDelArchivoDeConfiguracion(base,nombreFila)) {
@@ -55,19 +54,19 @@ public class buscarBaseEnTXT {
 
 	private void noExisteElArchivo(String nombre) {
 		
-		JOptionPane.showInternalMessageDialog(null, "NO EXISTE EL ARCHIVO "+ nombre);
-		
+		JOptionPane.showMessageDialog(null,  "NO EXISTE EL ARCHIVO "+ nombre, this.getClass().getName(),2);
+
 	}
 
 	private void noExisteLaBase(String base, String nombre) {
 		
-		JOptionPane.showInternalMessageDialog(null, "NO EXISTE LA BASE DE DATOS EN EL ARCHIVO "+ nombre);
+		JOptionPane.showMessageDialog(null, "NO EXISTE LA BASE DE DATOS EN EL ARCHIVO "+ nombre, this.getClass().getName(),2);
 		
 	}
 	
 	private void problemasParaAbrirElArchivo(String nombre) {
 		
-		JOptionPane.showInternalMessageDialog(null, "PROBLEMAS AL ABRIR EL ARCHIVO "+ nombre);
+		JOptionPane.showMessageDialog(null,  "PROBLEMAS AL ABRIR EL ARCHIVO "+ nombre, this.getClass().getName(),2);
 		
 	}
 	

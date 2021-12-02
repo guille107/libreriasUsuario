@@ -25,7 +25,6 @@ public class crearModConexionDesdeDatosEnTXT {
 	
 	public void setModCon(modConexion modelo) {
 		this.modeloDeConexion=modelo;
-		System.out.println(this.modeloDeConexion);
 	}
 
 }

@@ -13,7 +13,7 @@ public class modConexion {
   	private String usuario;
   	private String clave;
   	private String BaseDatos;
-	private	Connection conn=null;
+	private	Connection conexion=null;
 	
 	public modConexion() {
 		
@@ -33,30 +33,32 @@ public class modConexion {
 
     	try {
 
-    		conn = DriverManager.getConnection(url, datosConexion.getUsuario(), datosConexion.getClave());
+    		conexion = DriverManager.getConnection(url, datosConexion.getUsuario(), datosConexion.getClave());
 
         } catch (SQLException e) {
+        	
+        	System.out.println(e);
         	
 			JOptionPane.showMessageDialog(null, "NO SE PUEDE CONECTAR A LA BASE DE DATOS\n                SALIENDO DEL SISTEMA");
 			System.exit(0);
         }
   		 		
-  		return conn;
+  		return conexion;
   	}
 
   		
   	
     public void setConexion(Connection conn2) {
-		this.conn=conn2;
+		this.conexion=conn2;
 		
 	}
     public Connection getConexion() {
-    	return conn;
+    	return conexion;
     }
 
 	public void cerrar() throws SQLException {
-    	if (conn != null) {
-    		conn.close();
+    	if (conexion != null) {
+    		conexion.close();
     	}
    }
       
