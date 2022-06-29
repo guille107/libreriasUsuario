@@ -9,10 +9,11 @@ public class CRTransfo {
 		String textoEncriptado="";
 		
 		for(int a=0;a<textoSinEncriptar.length();a++) {
-			caracter=textoSinEncriptar.charAt(a);
+			caracter = textoSinEncriptar.charAt(a);
 			
 			//textoEncriptado=textoEncriptado+Character.toString((int)caracter+coeficiente);
-			textoEncriptado=textoEncriptado+ (char)(int)caracter+coeficiente;
+			textoEncriptado = textoEncriptado + Character.valueOf((char) ((int)caracter+coeficiente));
+
 		}
 		
 		return textoEncriptado;

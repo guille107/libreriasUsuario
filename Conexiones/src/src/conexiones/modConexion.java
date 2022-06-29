@@ -20,8 +20,7 @@ public class modConexion {
 	}
 	public modConexion(String nombreBD,String nombreFilaConDatosDeConexion) {
 		this.BaseDatos=nombreBD;
-			
-		
+					
 		setConexion(conectar(new crearModConexionDesdeDatosEnTXT(nombreBD,nombreFilaConDatosDeConexion).getModCon()));
 		
 	}
@@ -39,7 +38,7 @@ public class modConexion {
         	
         	System.out.println(e);
         	
-			JOptionPane.showMessageDialog(null, "NO SE PUEDE CONECTAR A LA BASE DE DATOS\n                SALIENDO DEL SISTEMA");
+			System.out.println("NO SE PUEDE CONECTAR A LA BASE DE DATOS. SALIENDO DEL SISTEMA " + datosConexion.getBaseDatos() );
 			System.exit(0);
         }
   		 		

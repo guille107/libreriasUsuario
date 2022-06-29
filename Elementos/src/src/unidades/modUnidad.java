@@ -12,7 +12,7 @@ import varios.Constantes;
 public class modUnidad {
 	private int idUnidad;
 	private String Unidad;
-	private String nombreBD=Constantes.NOMBRE_BD;
+	private String nombreBD=Constantes.NOMBRE_BD_TAFU;
 	private String archivoDeConfiguracionBD=Constantes.ARCHIVO_DE_CONFIG_BD;
 	private Connection conexion;
 

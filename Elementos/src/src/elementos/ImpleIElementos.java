@@ -1,8 +1,6 @@
 package elementos;
 
-import java.sql.Connection;
 
-import varios.Constantes;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
@@ -31,11 +29,15 @@ public class ImpleIElementos implements IElementos{
 		return null;
 	}
 	@Override
-	public Object buscaXidProveedor(String idProveedor) {
+	public Object buscaXIDProveedorYDevuelveElObjetoEncontrado(String idProveedor) {
+		
+		return null;
+	}
+	@Override
+	public Object buscarElElementoPorVariosCampos(String textoABuscar) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 	@Override
 	public boolean verificaSiExisteID(String idElemento) {
 		modConexion conexion=new modConexion();
@@ -48,7 +50,7 @@ public class ImpleIElementos implements IElementos{
 	}
 
 	@Override
-	public Object[] listaDeTodos(String cadena) {
+	public Object[] listaDeTodos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -157,4 +159,10 @@ public class ImpleIElementos implements IElementos{
 	public void setIdProveedor(String idProveedor) {
 		this.idProveedor = idProveedor;
 	}
+	@Override
+	public boolean verificaSiExisteProveedor(String descripProveedor) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

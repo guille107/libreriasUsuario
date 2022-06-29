@@ -14,7 +14,7 @@ public class modRubros {
 	private String Rubro;
 	private String SubRubro;
 	
-	private String nombreBD=Constantes.NOMBRE_BD;
+	private String nombreBD=Constantes.NOMBRE_BD_TAFU;
 	private String archivoDeConfiguracionBD=Constantes.ARCHIVO_DE_CONFIG_BD;
 	private Connection conexion;
 	
@@ -24,8 +24,9 @@ public class modRubros {
 
 	
 	public modRubros(String idRubro) {
-		super();
-		this.idRubro = idRubro;
+		
+		buscaRubroXID(idRubro);
+		
 	}
 
 	public modRubros(String id, String rubro, String subrubro) {
