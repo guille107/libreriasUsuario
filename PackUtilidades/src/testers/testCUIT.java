@@ -1,6 +1,7 @@
 package testers;
 
 import CUIT.entreLongYString;
+import CUIT.validaCUIT;
 
 public class testCUIT {
 
@@ -17,6 +18,12 @@ public class testCUIT {
 		System.out.println("Probando CUIT de 11 caracteres: " + entreLongYString.getCUITLong("20-25787193-3"));
 		System.out.println("Probando CUIT de 10 caracteres: " + entreLongYString.getCUITLong("20-2577193-3"));
 		System.out.println("Probando CUIT de 12 caracteres: " + entreLongYString.getCUITLong("20-257847193-3"));	
+		
+		System.out.println("VALIDAR CUIT");
+
+		System.out.println("Probando String CUIT 27-26652318-7: " +  validaCUIT.esValido("27-26652318-7"));
+		System.out.println("Probando Long CUIT 27266523187" + validaCUIT.esValido(27266523187L));
+		
 	}
 
 }

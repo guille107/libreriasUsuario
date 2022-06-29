@@ -13,13 +13,17 @@ public class entreLongYString {
 	}
 	
 	public static long getCUITLong(String CUIT) {
+
 		if(CUIT.length()!=13)
-			return 0;
+			return -1;
 		
-		CUIT=CUIT.replace("-","");
+		CUIT = CUIT.replace("-","");
+		CUIT = CUIT.replace("/","");
 		
 		
 		return Long.parseLong(CUIT);
+
+		
 	}
 	
 	
